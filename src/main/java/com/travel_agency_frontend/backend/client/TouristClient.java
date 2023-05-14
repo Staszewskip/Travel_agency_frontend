@@ -15,12 +15,12 @@ public class TouristClient {
     private final RestTemplate restTemplate;
     private final BackendConfig backEndConfig;
 
-    public String addTourist(TouristDTO touristDTO) {
+    public TouristDTO addTourist(TouristDTO touristDTO) {
         URI uri = UriComponentsBuilder.fromHttpUrl(backEndConfig.getEndpoint() + backEndConfig.getTourist())
                 .build()
                 .encode()
                 .toUri();
-        return restTemplate.postForObject(uri, touristDTO, String.class);
+        return restTemplate.postForObject(uri, touristDTO, TouristDTO.class);
     }
 
     public void deleteTourist(Long touristId) {

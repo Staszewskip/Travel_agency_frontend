@@ -1,52 +1,44 @@
 package com.travel_agency_frontend.views;
 
 
+import com.travel_agency_frontend.backend.domain.dto.ReservationForm;
 import com.travel_agency_frontend.backend.domain.dto.get.DestinationDTOGet;
-import com.vaadin.flow.component.HasText;
+import com.travel_agency_frontend.service.DestinationService;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 
-//@PageTitle("destinations")
 @Route("destinations")
 public class DestinationsView extends VerticalLayout {
+    private final DestinationService destinationService;
+    private final TextField filter = new TextField();
+    private final Grid<DestinationDTOGet> grid = new Grid<>(DestinationDTOGet.class);
 
+    public DestinationsView(DestinationService destinationService) {
+        this.destinationService = destinationService;
+        configureGrid();
+        refresh();
+        ReservationForm reservationForm = new ReservationForm();
+//        HorizontalLayout layout = new HorizontalLayout(grid);
 
-    public DestinationsView() {
-
+        add(grid);
         setSizeFull();
-
-
     }
 
-    public static Grid<DestinationDTOGet> setDestinationGrid(DestinationDTOGet destinationDTOGet) {
-        Grid<DestinationDTOGet> destinationDTGrid = new Grid<>(DestinationDTOGet.class);
-        destinationDTGrid.setColumns();
+    public void configureGrid() {
+        filter.setPlaceholder("Filter by city");
+        filter.setClearButtonVisible(true);
+        filter.setValueChangeMode(ValueChangeMode.LAZY);
+        setSizeFull();
+        grid.setColumns("country", "city", "postcode", "hotelsList");
+    }
 
-        destinationDTGrid.addComponentColumn(item -> {
-                    Label label = new Label();
-                    label.setText(destinationDTOGet.getCountry());
-                    label.setWhiteSpace(HasText.WhiteSpace.NORMAL);
-                    return label;
-                })
-                .setHeader("Country");
-        destinationDTGrid.addComponentColumn(item -> {
-                    Label label = new Label();
-                    label.setText(destinationDTOGet.getCity());
-                    label.setWhiteSpace(HasText.WhiteSpace.NORMAL);
-                    return label;
-                })
-                .setHeader("City");
-        destinationDTGrid.addComponentColumn(item -> {
-                    Label label = new Label();
-                    label.setText(destinationDTOGet.getHotelsList().toString());
-                    label.setWhiteSpace(HasText.WhiteSpace.NORMAL);
-                    return label;
-                })
-                .setHeader("Hotels");
 
-        return destinationDTGrid;
+    public void refresh() {
+        grid.setItems(destinationService.getDestinations());
     }
 }
