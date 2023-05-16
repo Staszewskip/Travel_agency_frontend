@@ -16,4 +16,11 @@ public class TouristDTOGet {
     boolean isAdult;
     String email;
     int phoneNumber;
+
+    @Override
+    public String toString() {
+        return
+                firstname + " "
+                        + lastname;
+    }
 }

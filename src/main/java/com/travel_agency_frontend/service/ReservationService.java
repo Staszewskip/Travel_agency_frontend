@@ -8,7 +8,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
+    private static ReservationService reservationService;
     private final ReservationClient reservationClient;
+
+    public static ReservationService getInstance(ReservationClient reservationClient) {
+        if (reservationService == null) {
+            reservationService = new ReservationService(reservationClient);
+        }
+        return reservationService;
+    }
+
     public ReservationDTO addReservation(ReservationDTO reservationDTO) {
         return reservationClient.addReservation(reservationDTO);
     }

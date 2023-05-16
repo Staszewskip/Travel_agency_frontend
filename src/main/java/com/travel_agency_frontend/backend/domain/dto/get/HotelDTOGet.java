@@ -10,5 +10,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HotelDTOGet {
+    String country;
+    String city;
     String name;
+
+    @Override
+    public String toString() {
+        return
+                city + " -> " + name;
+    }
 }
