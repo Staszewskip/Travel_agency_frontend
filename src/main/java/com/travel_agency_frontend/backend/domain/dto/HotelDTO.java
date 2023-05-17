@@ -12,6 +12,12 @@ import lombok.Setter;
 public class HotelDTO {
     Long hotelId;
     String name;
-    Long destinationID;
-    long unitPrice;
+    Long destinationId;
+    Long unitPrice;
+
+    @Override
+    public String toString() {
+        return
+                name;
+    }
 }

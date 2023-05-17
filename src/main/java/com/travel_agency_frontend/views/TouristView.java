@@ -7,12 +7,10 @@ import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import java.time.LocalDate;
-import java.time.Period;
 
 @PageTitle("Tourist")
 @Route("tourist")
@@ -22,7 +20,7 @@ public class TouristView extends FormLayout {
     private final TextField lastName = new TextField("Lastname");
     private final DatePicker birthday = new DatePicker("Date of birth");
     private final TextField login = new TextField("Login");
-    private final TextField password = new TextField("Password");
+    private final PasswordField password = new PasswordField("Password");
     private final EmailField email = new EmailField("Email");
     private final TextField phoneNumber = new TextField("Phone number");
     private final Button saveButton = new Button("Save");
@@ -35,27 +33,18 @@ public class TouristView extends FormLayout {
     }
 
 
-    public TouristDTO addTourist() {
+    public void addTourist() {
         TouristDTO touristDTO = new TouristDTO();
         touristDTO.setFirstname(firstName.getValue());
         touristDTO.setLastname(lastName.getValue());
-        touristDTO.setAdult(getBirthdate(birthday.getValue()));
+        touristDTO.setBirthdate(birthday.getValue());
         touristDTO.setLogin(login.getValue());
         touristDTO.setPassword(password.getValue());
         touristDTO.setEmail(email.getValue());
         touristDTO.setPhoneNumber(Integer.parseInt(phoneNumber.getValue()));
         Notification.show("Tourist saved");
-        return touristService.addTourist(touristDTO);
-    }
-
-    public boolean getBirthdate(LocalDate birthday) {
-        if (birthday == null) {
-            Notification.show("You did not choose any date");
-            return false;
-        } else if (Period.between(birthday, LocalDate.now()).getYears() > 18)
-            return true;
-        else {
-            return false;
-        }
+        touristService.addTourist(touristDTO);
     }
 }
+
+

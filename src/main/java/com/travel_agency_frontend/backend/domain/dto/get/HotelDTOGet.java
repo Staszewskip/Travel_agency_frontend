@@ -13,6 +13,7 @@ public class HotelDTOGet {
     String country;
     String city;
     String name;
+    Long unitPrice;
 
     @Override
     public String toString() {

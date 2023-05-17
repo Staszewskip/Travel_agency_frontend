@@ -17,12 +17,13 @@ public class MainView extends VerticalLayout {
         Anchor github = new Anchor("https://github.com/Staszewskip", "Link to my GitHub");
         Image downImage = new Image("images/beach.jpg", "Image at the main page of website");
         Button loginButton = new Button("Click to register new user", event -> UI.getCurrent().navigate("/tourist"));
-        Button destinationButton = new Button("Click to check available destinations", event -> UI.getCurrent().navigate("/destinations"));
+        Button hotelButton = new Button("Click to check available destinations", event -> UI.getCurrent().navigate("/hotels"));
+        Button reservationButton = new Button("Click to make reservation", event -> UI.getCurrent().navigate("/reservations"));
 
         VerticalLayout header = new VerticalLayout(title, text, author, name, github);
         header.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout(loginButton, destinationButton);
+        HorizontalLayout horizontalLayout = new HorizontalLayout(loginButton, hotelButton, reservationButton);
         horizontalLayout.setDefaultVerticalComponentAlignment(Alignment.CENTER);
 
         VerticalLayout downImageLayout = new VerticalLayout(downImage);

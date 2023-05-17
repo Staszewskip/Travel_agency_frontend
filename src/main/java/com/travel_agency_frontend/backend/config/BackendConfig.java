@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 public class BackendConfig {
     @Value("${backend.server.endpoint}")
     private String endpoint;
-    @Value("${backend.destination}")
-    private String destinaton;
     @Value("${backend.hotel}")
     private String hotel;
     @Value("${backend.tourist}")
