@@ -15,7 +15,6 @@ public class HotelService {
     private static HotelService hotelService;
     private final HotelClient hotelClient;
 
-
     public static HotelService getInstance(HotelClient hotelClient) {
         if (hotelService == null) {
             hotelService = new HotelService(hotelClient);

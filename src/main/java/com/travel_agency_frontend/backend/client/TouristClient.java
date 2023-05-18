@@ -2,6 +2,8 @@ package com.travel_agency_frontend.backend.client;
 
 import com.travel_agency_frontend.backend.config.BackendConfig;
 import com.travel_agency_frontend.backend.domain.dto.TouristDTO;
+import com.travel_agency_frontend.backend.domain.dto.TouristLoggedDTO;
+import com.travel_agency_frontend.backend.domain.dto.TouristLoggingDTO;
 import com.travel_agency_frontend.backend.domain.dto.get.TouristDTOGet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,19 +30,28 @@ public class TouristClient {
         return restTemplate.postForObject(uri, touristDTO, TouristDTO.class);
     }
 
-    public List<TouristDTOGet> showAllTourists() {
-        URI uri = UriComponentsBuilder.fromHttpUrl(backEndConfig.getEndpoint() + backEndConfig.getTourist() + "/admin")
+    public TouristLoggedDTO login(TouristLoggingDTO touristLoggingDTO) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(backEndConfig.getEndpoint() + backEndConfig.getTourist() + "/login")
                 .build()
                 .encode()
                 .toUri();
-        try {
-            TouristDTOGet[] response = restTemplate.getForObject(uri, TouristDTOGet[].class);
-            return new ArrayList<>(Optional.ofNullable(response)
-                    .map(Arrays::asList)
-                    .orElse(Collections.emptyList()));
-        } catch (RestClientException e) {
-            log.error(e.getMessage(), e);
-            return Collections.emptyList();
-        }
+        return restTemplate.getForObject(uri, TouristLoggedDTO.class);
+    }
+
+    public TouristDTOGet findByLogin(String login) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(backEndConfig.getEndpoint() + backEndConfig.getTourist())
+                .queryParam("login", login)
+                .build()
+                .encode()
+                .toUri();
+        return restTemplate.getForObject(uri, TouristDTOGet.class);
+    }
+    public boolean existsByLogin(String login) {
+        URI uri = UriComponentsBuilder.fromHttpUrl(backEndConfig.getEndpoint() + backEndConfig.getTourist() + "/logincheck")
+                .queryParam("login", login)
+                .build()
+                .encode()
+                .toUri();
+        return restTemplate.getForObject(uri, boolean.class);
     }
 }

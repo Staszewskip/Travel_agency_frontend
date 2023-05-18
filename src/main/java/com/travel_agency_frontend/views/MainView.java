@@ -9,6 +9,8 @@ import com.vaadin.flow.router.Route;
 
 @Route("home")
 public class MainView extends VerticalLayout {
+
+
     public MainView() {
         H1 title = new H1("Travel agency");
         H4 text = new H4("This is a simple travel agency application - final project of the Kodilla Java Developer Course");
@@ -18,7 +20,7 @@ public class MainView extends VerticalLayout {
         Image downImage = new Image("images/beach.jpg", "Image at the main page of website");
         Button loginButton = new Button("Click to register new user", event -> UI.getCurrent().navigate("/tourist"));
         Button hotelButton = new Button("Click to check available destinations", event -> UI.getCurrent().navigate("/hotels"));
-        Button reservationButton = new Button("Click to make reservation", event -> UI.getCurrent().navigate("/reservations"));
+        Button reservationButton = new Button("Click to login & make reservation", event -> UI.getCurrent().navigate("/login"));
 
         VerticalLayout header = new VerticalLayout(title, text, author, name, github);
         header.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
@@ -28,7 +30,7 @@ public class MainView extends VerticalLayout {
 
         VerticalLayout downImageLayout = new VerticalLayout(downImage);
         downImageLayout.setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-
+        setAlignItems(Alignment.CENTER);
         add(header, horizontalLayout, downImageLayout);
     }
 

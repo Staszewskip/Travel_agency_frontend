@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,7 +15,8 @@ public class TouristDTOGet {
     Long touristId;
     String firstname;
     String lastname;
-    boolean isAdult;
+    String login;
+    LocalDate birthdate;
     String email;
     int phoneNumber;
 

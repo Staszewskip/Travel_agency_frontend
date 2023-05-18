@@ -54,12 +54,13 @@ public class HotelClient {
             return Collections.emptyList();
         }
     }
-        public String createExampleData() {
-            URI url = UriComponentsBuilder.fromHttpUrl(
-                            backEndConfig.getEndpoint() + backEndConfig.getHotel() + "/testData")
-                    .build()
-                    .encode()
-                    .toUri();
-            return restTemplate.postForObject(url,null,String.class);
+
+    public String createExampleData() {
+        URI url = UriComponentsBuilder.fromHttpUrl(
+                        backEndConfig.getEndpoint() + backEndConfig.getHotel() + "/testData")
+                .build()
+                .encode()
+                .toUri();
+        return restTemplate.postForObject(url, null, String.class);
     }
 }

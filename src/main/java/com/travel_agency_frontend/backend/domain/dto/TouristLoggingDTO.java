@@ -5,15 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReservationDTO {
-    Long reservationOwnerId;
-    Long hotelId;
-    LocalDate checkIn_date;
-    LocalDate checkOut_date;
+public class TouristLoggingDTO {
+    String login;
+    String password;
 }

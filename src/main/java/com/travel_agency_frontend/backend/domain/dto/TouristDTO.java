@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TouristDTO{
+public class TouristDTO {
     Long touristId;
     String firstname;
     String lastname;
@@ -20,4 +20,5 @@ public class TouristDTO{
     String password;
     String email;
     int phoneNumber;
+    Role role;
 }

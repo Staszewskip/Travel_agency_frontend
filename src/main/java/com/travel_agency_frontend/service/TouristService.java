@@ -2,16 +2,16 @@ package com.travel_agency_frontend.service;
 
 import com.travel_agency_frontend.backend.client.TouristClient;
 import com.travel_agency_frontend.backend.domain.dto.TouristDTO;
+import com.travel_agency_frontend.backend.domain.dto.TouristLoggedDTO;
+import com.travel_agency_frontend.backend.domain.dto.TouristLoggingDTO;
 import com.travel_agency_frontend.backend.domain.dto.get.TouristDTOGet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class TouristService {
-    private static TouristService touristService;
+    public static TouristService touristService;
     private final TouristClient touristClient;
 
     public static TouristService getInstance(TouristClient touristClient) {
@@ -25,7 +25,16 @@ public class TouristService {
         return touristClient.addTourist(touristDTO);
     }
 
-    public List<TouristDTOGet> getTourists() {
-        return touristClient.showAllTourists();
+    public TouristLoggedDTO login(TouristLoggingDTO touristLoggingDTO) {
+        return touristClient.login(touristLoggingDTO);
     }
+
+    public TouristDTOGet findByLogin(String login) {
+        return touristClient.findByLogin(login);
+    }
+
+    public boolean existsByLogin(String login) {
+        return touristClient.existsByLogin(login);
+    }
+
 }
