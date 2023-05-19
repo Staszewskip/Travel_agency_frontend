@@ -9,18 +9,20 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Route("hotels")
 public class HotelView extends VerticalLayout {
     private final HotelService hotelService;
     private final TextField filter = new TextField();
     private final Grid<HotelDTOGet> grid = new Grid<>(HotelDTOGet.class);
 
+
     public HotelView(HotelClient hotelClient) {
         this.hotelService = HotelService.getInstance(hotelClient);
-        createExampleData();
         configureGrid();
+        createExampleData();
         refresh();
         add(filter, grid);
     }

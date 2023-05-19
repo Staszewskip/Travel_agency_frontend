@@ -22,6 +22,7 @@ public class LoggingForm extends FormLayout {
     public LoggingForm(TouristClient touristClient) {
         this.touristService = TouristService.getInstance(touristClient);
         log_in.addClickListener(login -> login());
+        setMaxWidth("800px");
         add(login, password, log_in);
     }
 
